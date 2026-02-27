@@ -1,4 +1,4 @@
-package introductoryProblems.grafitos;
+package graph;
 
 import java.util.*;
 
