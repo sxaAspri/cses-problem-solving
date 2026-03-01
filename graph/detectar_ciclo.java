@@ -59,7 +59,7 @@ public class detectar_ciclo {
             if (!visited[neighbor]) {
                 dfsCycle(neighbor, node);
             }
-            else if (neighbor != par && !hasCycle) {
+            else if (neighbor != par && hasCycle== false) {
 
                 hasCycle = true;
 
