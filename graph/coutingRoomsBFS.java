@@ -2,7 +2,7 @@ package graph;
 import java.io.*;
 import java.util.*;
 
-public class coutingRooms {
+public class coutingRoomsBFS {
 
     static int n, m; //tamaño de mi grid
     static char[][] grid; // el grid
@@ -38,7 +38,7 @@ public class coutingRooms {
                 // Si es . y no ha sido visitado 
                 if (grid[i][j] == '.' && !visited[i][j]) {
                     rooms++;        // Encontramos nuevo cuarto
-                    dfs(i, j);      // aplciamos dfs sobre ese cuarto para recorrer todos los pisos del cuarto encontrado , al terminar
+                    bfs(i, j);      // aplciamos dfs sobre ese cuarto para recorrer todos los pisos del cuarto encontrado , al terminar
                                     // estaria terminando de recorrer todo ese cuarto y puedo pasar a un nuevo nodo para ver si es otro cuarto 
                 }
             }
@@ -47,26 +47,31 @@ public class coutingRooms {
         System.out.println(rooms);
     }
 
-    static void dfs(int x, int y) {
+    static void bfs(int x, int y) {
 
-        visited[x][y] = true;
+    Queue<int[]> q = new LinkedList<>();
+    q.add(new int[]{x, y});
+    visited[x][y] = true;
 
-        // for de el recorrido del grafo en 4 direcciones 
+    while (!q.isEmpty()) {
+
+        int[] current = q.poll();
+        int cx = current[0];
+        int cy = current[1];
+
         for (int d = 0; d < 4; d++) {
 
-            int nx = x + dx[d]; // avanza sobre las casillas establecidad de dx y dy 
-            int ny = y + dy[d]; // cuando recorre cada una de esta hace la combinacion de arriba abajo izquierda derecha 
+            int nx = cx + dx[d];
+            int ny = cy + dy[d];
 
-            // Verificar límites
-            if (nx >= 0 && nx < n && ny >= 0 && ny < m) { // digamos que estoy en el (0,0) si me muevo a la izquierda me salgo , en ese caso ignoro 
-                                                          // y paso a la siguiente posicionn 
+            if (nx >= 0 && nx < n && ny >= 0 && ny < m) {
 
-                // Si es piso y no visitado
-                if (grid[nx][ny] == '.' && !visited[nx][ny]) { //si la posicion que visite es . y no la he visitado , entonces estoy descubriendo 
-                                                               // un nuevo piso , y aplico dfs sobre el siguiente nodo 
-                    dfs(nx, ny);
+                if (grid[nx][ny] == '.' && !visited[nx][ny]) {
+                    visited[nx][ny] = true;
+                    q.add(new int[]{nx, ny});
                 }
             }
         }
     }
+}
 }

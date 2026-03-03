@@ -16,7 +16,7 @@ public class bugs_life {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        int T = Integer.parseInt(br.readLine()); // número de escenarios
+        int T = Integer.parseInt(br.readLine()); 
 
         for (int scenario = 1; scenario <= T; scenario++) {
 
